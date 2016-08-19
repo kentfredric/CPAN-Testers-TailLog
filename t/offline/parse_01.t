@@ -73,7 +73,7 @@ for my $row ( sort { $a <=> $b } keys %expected ) {
     for my $col ( 0 .. $#{ $expected{$row} } ) {
         my $field = $fields[$col];
         cmp_ok(
-            as_bytes( $results->[$row]->{$field} ),
+            as_bytes( $results->[$row]->$field() ),
             'eq',
             as_bytes( $expected{$row}->[$col] ),
             "Row $row\'s $field($col) was expected value: "

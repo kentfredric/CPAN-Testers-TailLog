@@ -72,7 +72,8 @@ sub _parse_line {
       \[ (.+?) \] # accepted
     }x
       );
-    \%record;
+    require CPAN::Testers::TailLog::Result;
+    CPAN::Testers::TailLog::Result->new( \%record );
 }
 
 sub _parse_response {
