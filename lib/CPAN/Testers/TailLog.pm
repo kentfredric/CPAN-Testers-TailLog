@@ -27,7 +27,16 @@ sub cache_file {
 }
 
 sub get {
+
+    # If this fails, we just parse what we parsed last time
+    # Actually, not sure if mirror is atomic or not.
+    # Mirror is used here also to get automatic if-modified behaviour
     $_[0]->_ua->mirror( $_[0]->url, $_[0]->cache_file );
+
+    # So if the connection goes away and HTTP::Tiny fubars,
+    # we just pretend things are fine for now.
+    # mostly, because deciding how to handle error cases hurt
+    # my tiny brain
     $_[0]->_parse_response( $_[0]->cache_file );
 }
 
