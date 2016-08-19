@@ -15,9 +15,8 @@ sub new {
     my $buildargs = { ref $_[1] ? %{ $_[1] } : @_[ 1 .. $#_ ] };
     my $class = ref $_[0] ? ref $_[0] : $_[0];
     my $self = bless $buildargs, $class;
-    $self->_check_cache_file  if exists $self->{cache_file};
-    $self->_check_min_refresh if exists $self->{min_refresh};
-    $self->_check_url         if exists $self->{url};
+    $self->_check_cache_file if exists $self->{cache_file};
+    $self->_check_url        if exists $self->{url};
     $self;
 }
 
@@ -28,20 +27,8 @@ sub cache_file {
 }
 
 sub get {
-    if (   $_[0]->min_refresh <= 0
-        or not defined $_[0]->{_last_refresh}
-        or ( ( time - $_[0]->{_last_refresh} ) > $_[0]->min_refresh ) )
-    {
-        $_[0]->_ua->mirror( $_[0]->url, $_[0]->cache_file );
-        $_[0]->{_last_refresh} = time;
-    }
+    $_[0]->_ua->mirror( $_[0]->url, $_[0]->cache_file );
     $_[0]->_parse_response( $_[0]->cache_file );
-}
-
-sub min_refresh {
-    $_[0]->{min_refresh} = $_[0]->_build_min_refresh
-      unless exists $_[0]->{min_refresh};
-    $_[0]->{min_refresh};
 }
 
 sub url {
@@ -109,10 +96,6 @@ sub _build_cache_file {
     $temp->filename;
 }
 
-sub _build_min_refresh {
-    60;
-}
-
 sub _build_ua {
     require HTTP::Tiny;
     HTTP::Tiny->new( agent => ( $DISTNAME . '/' . $VERSION ), );
@@ -139,11 +122,6 @@ sub _check_cache_file {
     }
     return if -e $path and not -d $path and -w $path;
     die "cache_file: $path exists but is unwriteable";
-}
-
-sub _check_min_refresh {
-    die "min_refresh: not a positive integer"
-      unless $_[0]->{min_refresh} =~ /\A\d+\z/;
 }
 
 sub _check_url {

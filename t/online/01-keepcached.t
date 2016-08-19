@@ -19,8 +19,7 @@ sub timeit {
     return tv_interval( $start, [gettimeofday] );
 }
 
-# Cache time at one hour to ensure successive calls don't round trip
-my $client = CPAN::Testers::TailLog->new( min_refresh => 60 * 60 );
+my $client = CPAN::Testers::TailLog->new();
 
 my $result;
 my $first  = timeit( sub { $result = $client->get() } );
@@ -31,4 +30,3 @@ note "Second: $second\n";
 cmp_ok( $first, ">=", $second, "First pass should be the slowest" );
 
 done_testing;
-
