@@ -141,3 +141,18 @@ sub _check_url {
 
 1;
 
+=head1 NAME
+
+CPAN-Testers-TailLog - Extract recent test statuses from metabase log
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 LICENSE
+
+This software is copyright (c) 2016 by Kent Fredric.
+
+This is free software; you can redistribute it and/or modify it under the same
+terms as the Perl 5 programming language system itself.
+
