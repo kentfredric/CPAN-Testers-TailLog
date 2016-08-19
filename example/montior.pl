@@ -19,9 +19,9 @@ while (1) {
 sub update {
     my @new;
     for my $item ( @{ $fetcher->get } ) {
-        next if exists $seen{ $item->{uuid} };
-        next if $item->{grade} eq 'pass';
-        $seen{ $item->{uuid} } = 1;
+        next if exists $seen{ $item->uuid };
+        next if $item->grade eq 'pass';
+        $seen{ $item->uuid } = 1;
         push @new, $item;
     }
     unless (@new) {
@@ -31,13 +31,13 @@ sub update {
     printf "\e[36m%s\e[0m:\n", scalar localtime;
     for my $item (@new) {
         my $color =
-            $item->{grade} eq 'pass' ? "\e[1;32m"
-          : $item->{grade} eq 'fail' ? "\e[1;31m"
-          :                            "\e[33m";
+            $item->grade eq 'pass' ? "\e[1;32m"
+          : $item->grade eq 'fail' ? "\e[1;31m"
+          :                          "\e[33m";
         printf
 "%s%10s\e[0m: %-55s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
-          $color, $item->{grade}, $item->{filename},
-          $item->{perlversion}, $item->{platform}, $item->{uuid};
+          $color, $item->grade, $item->filename,
+          $item->perlversion, $item->platform, $item->uuid;
 
     }
 }
