@@ -154,17 +154,73 @@ CPAN-Testers-TailLog - Extract recent test statuses from metabase log
 
 =head2 new
 
-=head3 OPTIONS
+Creates an object for fetching results.
 
-=head4 cache_file
+  my $tailer = CPAN::Testers::TailLog->new(
+    %options
+  );
 
-=head4 url
+=head3 new:cache_file
+
+  ->new( cache_file => "/path/to/file" )
+
+If not specified, defaults to a C<File::Temp> file.
+
+This is good enough for in-memory persistence, so for code that is long lived
+setting this is not really necessary.
+
+However, if you want a regularly exiting process, like a cron job, you'll
+probably want to set this to a writeable path.
+
+This will ensure you save redundant bandwidth if you sync too quickly, as the
+C<mtime> will be used for C<If-Modified-Since>.
+
+Your C<get> calls will still look the same, but they'll be a little faster,
+you'll eat a little less bandwidth, and stress the remote server a little less.
+
+=head3 new:url
+
+  ->new( url => "http://path/to/tail.log" )
+
+If not specified, uses the default URL,
+
+  http://metabase.cpantesters.org/tail/log.txt
+
+Its not likely you'll have a use for this, but it may turn out useful for
+debugging, or maybe somebody out there as an equivalent private server with
+this log.
 
 =head2 cache_file
 
+Accessor for configured cache file path
+
+  my $path = $tailer->cache_file
+
 =head2 get
 
+Fetches the most recent data possible as an C<ArrayRef> of
+L<CPAN::Testers::TailLog::Result>
+
+  my $arrayref = $tailer->get();
+
+Note that an arrayref will be returned regardless of what happens. It helps to
+assume the result is just a dumb transfer.
+
+Though keep in mind non-C<ArrayRef>s may be returned in error conditions
+(Undecided).
+
+Calling this multiple times will be efficient using C<If-Modified-Since>
+headers where applicable.
+
+Though even if nothing has changed, you'll get a full copy of the last state.
+
+If you want an "only what's changed since last time we checked, see F<examples>
+
 =head2 url
+
+Accessor for configured log URL.
+
+  my $url = $tailer->url;
 
 =head1 AUTHOR
 
