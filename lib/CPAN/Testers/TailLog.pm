@@ -158,6 +158,13 @@ CPAN-Testers-TailLog - Extract recent test statuses from metabase log
 
 =head1 DESCRIPTION
 
+B<CPAN::Testers::TailLog> is a simple interface to the C<Metabase> C<tail.log>
+located at C<http://metabase.cpantesters.org/tail/log.txt>
+
+This module simply wraps the required HTTP Request mechanics, some persistent
+caching glue for performance, and a trivial parsing layer to provide an object
+oriented view of the log.
+
 =head1 METHODS
 
 =head2 new
