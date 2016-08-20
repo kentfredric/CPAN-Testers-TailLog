@@ -6,7 +6,7 @@ MANIFEST.SKIP
 META.json
 META.yml
 README.pod
-example/montior.pl
+example/monitor.pl
 lib/CPAN/Testers/TailLog.pm
 lib/CPAN/Testers/TailLog/Result.pm
 metamerge.json
