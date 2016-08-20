@@ -146,6 +146,26 @@ sub _check_url {
 
 CPAN-Testers-TailLog - Extract recent test statuses from metabase log
 
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head1 METHODS
+
+=head2 new
+
+=head3 OPTIONS
+
+=head4 cache_file
+
+=head4 url
+
+=head2 cache_file
+
+=head2 get
+
+=head2 url
+
 =head1 AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
