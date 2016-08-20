@@ -237,6 +237,35 @@ Accessor for configured log URL.
 
   my $url = $tailer->url;
 
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<P5U::Command::cttail>
+
+Some of the logic of this module shares similarity with the contents of that
+module, however, that module is designed as a standalone application that
+simply shows the current status with some filtration options.
+
+It is not however designed for re-use.
+
+My objective is different, and I want to write a daemon that periodically polls
+for new records, and creates a local database ( Similar to what likely happens
+inside C<fast-matrix.cpantesters.org> ) of reports for quick searching, and I
+figure this sort of logic can also be useful for somebody who wants a
+C<desktop-notification-on-failure> monitor.
+
+Some of the logic was cribbed from this and reduced to be closer to verbatim.
+
+=item * L<fast-matrix tail-log-to-json|https://github.com/eserte/cpan-testers-matrix/blob/master/bin/tail-log-to-json.pl>
+
+C<CPAN::Testers::TailLog> contains similar logic to this script as well, again,
+prioritizing for simplicity and re-use.
+
+Any specific mangling with C<distinfo> is left to the consumer.
+
+=back
+
 =head1 AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
