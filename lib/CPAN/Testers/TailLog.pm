@@ -148,6 +148,14 @@ CPAN-Testers-TailLog - Extract recent test statuses from metabase log
 
 =head1 SYNOPSIS
 
+  use CPAN::Testers::TailLog;
+
+  my $tailer = CPAN::Testers::TailLog->new();
+  my $results = $tailer->get();
+  for my $item ( @{ $results } ) {
+    printf "%s: %s\n", $item->grade, $item->filename;
+  }
+
 =head1 DESCRIPTION
 
 =head1 METHODS
