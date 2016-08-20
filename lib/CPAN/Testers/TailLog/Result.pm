@@ -12,14 +12,14 @@ our $VERSION = '0.001000';
 
 sub new { bless $_[1], $_[0] }
 
-sub submitted   { $_[0]->{submitted} }
-sub reporter    { $_[0]->{reporter} }
-sub grade       { $_[0]->{grade} }
-sub filename    { $_[0]->{filename} }
-sub platform    { $_[0]->{platform} }
-sub perlversion { $_[0]->{perlversion} }
-sub uuid        { $_[0]->{uuid} }
 sub accepted    { $_[0]->{accepted} }
+sub filename    { $_[0]->{filename} }
+sub grade       { $_[0]->{grade} }
+sub perlversion { $_[0]->{perlversion} }
+sub platform    { $_[0]->{platform} }
+sub reporter    { $_[0]->{reporter} }
+sub submitted   { $_[0]->{submitted} }
+sub uuid        { $_[0]->{uuid} }
 
 1;
 
