@@ -1,0 +1,24 @@
+{
+   "prereqs" : {
+      "develop" : {
+         "requires" : {
+            "App::ModuleBuildTiny" : "0.014"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "File::Temp" : "0",
+            "HTTP::Tiny" : "0",
+            "Path::Tiny" : "0.040",
+            "perl" : "5.006"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Path::Tiny" : "0.070",
+            "Test::More" : "0.89",
+            "Time::HiRes" : "0"
+         }
+      }
+   }
+}
