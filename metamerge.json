@@ -20,5 +20,15 @@
             "Time::HiRes" : "0"
          }
       }
+   },
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kentnl/CPAN-Testers-TailLog/issues"
+      },
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/kentnl/CPAN-Testers-TailLog",
+         "web" : "https://github.com/kentnl/CPAN-Testers-TailLog"
+      }
    }
 }
