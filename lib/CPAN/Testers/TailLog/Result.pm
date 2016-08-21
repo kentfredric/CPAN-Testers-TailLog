@@ -12,14 +12,14 @@ our $VERSION = '0.001000';
 
 sub new { bless $_[1], $_[0] }
 
-sub accepted    { $_[0]->{accepted} }
-sub filename    { $_[0]->{filename} }
-sub grade       { $_[0]->{grade} }
-sub perlversion { $_[0]->{perlversion} }
-sub platform    { $_[0]->{platform} }
-sub reporter    { $_[0]->{reporter} }
-sub submitted   { $_[0]->{submitted} }
-sub uuid        { $_[0]->{uuid} }
+sub accepted     { $_[0]->{accepted} }
+sub filename     { $_[0]->{filename} }
+sub grade        { $_[0]->{grade} }
+sub perl_version { $_[0]->{perl_version} }
+sub platform     { $_[0]->{platform} }
+sub reporter     { $_[0]->{reporter} }
+sub submitted    { $_[0]->{submitted} }
+sub uuid         { $_[0]->{uuid} }
 
 1;
 
@@ -60,12 +60,12 @@ The status of the test report
   # pass|fail|na|unknown
   my $grade = $result->grade
 
-=head2 perlversion
+=head2 perl_version
 
 The version of Perl the test ran on
 
   # perl-vX.YY.Z
-  my $pv = $result->perlversion
+  my $pv = $result->perl_version
 
 =head2 platform
 

@@ -50,7 +50,7 @@ sub url {
 sub _parse_line {
     my %record;
     @record{
-        qw( submitted reporter grade filename platform perlversion uuid accepted )
+        qw( submitted reporter grade filename platform perl_version uuid accepted )
       } = (
         $_[1] =~ qr{
       \A
@@ -65,7 +65,7 @@ sub _parse_line {
       \s*
       \[ (.*?) \] # platform
       \s*
-      \[ (.*?) \] # perlversion
+      \[ (.*?) \] # perl_version
       \s*
       \[ (.*?) \] # uuid
       \s*

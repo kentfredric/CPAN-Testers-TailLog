@@ -37,7 +37,7 @@ sub update {
         printf
 "%s%10s\e[0m: %-55s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
           $color, $item->grade, $item->filename,
-          $item->perlversion, $item->platform, $item->uuid;
+          $item->perl_version, $item->platform, $item->uuid;
 
     }
 }

@@ -64,8 +64,8 @@ my %expected = (
     ],
 );
 my @fields = (
-    'submitted', 'reporter',    'grade', 'filename',
-    'platform',  'perlversion', 'uuid',  'accepted'
+    'submitted', 'reporter',     'grade', 'filename',
+    'platform',  'perl_version', 'uuid',  'accepted'
 );
 
 for my $row ( sort { $a <=> $b } keys %expected ) {
