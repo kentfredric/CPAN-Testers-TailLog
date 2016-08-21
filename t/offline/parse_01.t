@@ -89,5 +89,12 @@ cmp_ok(
     'Got first author ok'
 );
 
+for my $result ( 0 .. $#{$results} ) {
+    ok(
+        defined $results->[$result]->submitted,
+        "Item $result has defined submission time"
+    );
+}
+
 done_testing;
 

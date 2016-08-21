@@ -55,21 +55,21 @@ sub _parse_line {
         $_[1] =~ qr{
       \A
       \s*
-      \[ (.+? ) \] # submitted
+      \[ (.*? ) \] # submitted
       \s*
-      \[ (.+? ) \] # reported
+      \[ (.*? ) \] # reported
       \s*
-      \[ (.+? ) \] # grade
+      \[ (.*? ) \] # grade
       \s*
-      \[ (.+?) \] # filename
+      \[ (.*?) \] # filename
       \s*
-      \[ (.+?) \] # platform
+      \[ (.*?) \] # platform
       \s*
-      \[ (.+?) \] # perlversion
+      \[ (.*?) \] # perlversion
       \s*
-      \[ (.+?) \] # uuid
+      \[ (.*?) \] # uuid
       \s*
-      \[ (.+?) \] # accepted
+      \[ (.*?) \] # accepted
     }x
       );
     require CPAN::Testers::TailLog::Result;

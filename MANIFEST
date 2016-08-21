@@ -11,6 +11,8 @@ lib/CPAN/Testers/TailLog.pm
 lib/CPAN/Testers/TailLog/Result.pm
 metamerge.json
 t/files/01-log.txt
+t/files/02-log.txt
 t/lib/HTTP/Tiny/Mock.pm
 t/offline/parse_01.t
+t/offline/parse_02.t
 t/online/01-keepcached.t
