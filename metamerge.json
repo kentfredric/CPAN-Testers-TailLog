@@ -2,7 +2,8 @@
    "prereqs" : {
       "develop" : {
          "requires" : {
-            "App::ModuleBuildTiny" : "0.014"
+            "App::ModuleBuildTiny" : "0.014",
+            "CPAN::Meta" : "2.150010"
          }
       },
       "runtime" : {
@@ -19,6 +20,10 @@
             "Test::More" : "0.89",
             "Time::HiRes" : "0"
          }
+      },
+      "x_examples" : {
+         "Time::HiRes" : "0",
+         "constant" : "0"
       }
    },
    "resources" : {
