@@ -37,7 +37,14 @@ sub get {
     # we just pretend things are fine for now.
     # mostly, because deciding how to handle error cases hurt
     # my tiny brain
-    $_[0]->_parse_response( $_[0]->cache_file );
+
+    require Path::Tiny;
+    my (@lines) =
+      Path::Tiny::path( $_[0]->cache_file )->lines_utf8( { chomp => 1 } );
+
+    # Skip prelude
+    shift @lines while @lines and $lines[0] !~ /\A\s*\[/;
+    [ map { $_[0]->_parse_line($_) } @lines ];
 }
 
 sub url {
@@ -74,15 +81,6 @@ sub _parse_line {
       );
     require CPAN::Testers::TailLog::Result;
     CPAN::Testers::TailLog::Result->new( \%record );
-}
-
-sub _parse_response {
-    require Path::Tiny;
-    my (@lines) = Path::Tiny::path( $_[1] )->lines_utf8( { chomp => 1 } );
-
-    # Skip prelude
-    shift @lines while @lines and $lines[0] !~ /\A\s*\[/;
-    [ map { $_[0]->_parse_line($_) } @lines ];
 }
 
 sub _ua {
