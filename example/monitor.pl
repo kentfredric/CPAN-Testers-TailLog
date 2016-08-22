@@ -76,7 +76,7 @@ sub update {
 
         my $perl = sprintf "%s%-20s\e[0m",
           perl_version_color( $item->perl_version ), $item->perl_version;
-        printf "%s: %s ( %s on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
+        printf "%s: %s ( %s on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\n",
           $grade, $filename, $perl, $item->platform, $item->uuid;
     }
 }
