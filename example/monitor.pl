@@ -36,11 +36,11 @@ sub update {
     }
     printf "\e[36m%s\e[0m:\n", scalar localtime;
     for my $item (@new) {
-        my $color = grade_color( $item->grade );
-
+        my $grade = sprintf qq{%s%10s\e[0m}, grade_color( $item->grade ),
+          $item->grade;
         printf
-"%s%10s\e[0m: %-55s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
-          $color, $item->grade, $item->filename,
+"%s: %-55s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
+          $grade, $item->filename,
           $item->perl_version, $item->platform, $item->uuid;
 
     }
