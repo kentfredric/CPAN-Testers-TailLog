@@ -70,7 +70,7 @@ sub format_result {
 }
 
 sub update {
-    my @new;
+    my $did_match = 0;
     my $new_items = 0;
     my $iter      = $fetcher->get_iter;
     my $first_uuid;
@@ -85,21 +85,21 @@ sub update {
 
         $new_items++;
         next if $item->grade eq 'pass' and $item->filename !~ m^KENTNL/^;
-        push @new, $item;
+        if ( not $did_match ) {
+            printf "\e[36m%s\e[0m:\n", scalar localtime;
+            $did_match = 1;
+        }
+        format_result($item);
     }
 
     # Set the watermark for next run.
     if ( defined $first_uuid ) {
         $last_uuid = $first_uuid;
     }
-    unless (@new) {
+    unless ($did_match) {
         printf "%s: \e[35m -- No Updates ($new_items new items) -- \e[0m\n",
           scalar localtime;
         return;
-    }
-    printf "\e[36m%s\e[0m:\n", scalar localtime;
-    for my $item (@new) {
-        format_result($item);
     }
 }
 
