@@ -49,6 +49,26 @@ sub author_color {
     return "\e[30;43m";
 }
 
+sub format_result {
+    my ($item) = $_[0];
+    my $grade = sprintf qq{%s%10s\e[0m}, grade_color( $item->grade ),
+      $item->grade;
+
+    my $author = author_name( $item->filename );
+    my $filename = sprintf "%-55s", $item->filename;
+    $filename =~ s{
+            \A\Q$author\E
+        }{
+            author_color($author, $item->grade) . $author . "\e[0m"
+        }ex;
+
+    my $perl = sprintf "%s%-20s\e[0m",
+      perl_version_color( $item->perl_version ), $item->perl_version;
+
+    printf "%s: %s ( %s on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\n",
+      $grade, $filename, $perl, $item->platform, $item->uuid;
+}
+
 sub update {
     my @new;
     my $new_items = 0;
@@ -71,21 +91,7 @@ sub update {
     }
     printf "\e[36m%s\e[0m:\n", scalar localtime;
     for my $item (@new) {
-        my $grade = sprintf qq{%s%10s\e[0m}, grade_color( $item->grade ),
-          $item->grade;
-
-        my $author = author_name( $item->filename );
-        my $filename = sprintf "%-55s", $item->filename;
-        $filename =~ s{
-            \A\Q$author\E
-        }{
-            author_color($author, $item->grade) . $author . "\e[0m"
-        }ex;
-
-        my $perl = sprintf "%s%-20s\e[0m",
-          perl_version_color( $item->perl_version ), $item->perl_version;
-        printf "%s: %s ( %s on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\n",
-          $grade, $filename, $perl, $item->platform, $item->uuid;
+        format_result($item);
     }
 }
 
