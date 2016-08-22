@@ -47,6 +47,31 @@ sub get {
     [ map { $_[0]->_parse_line($_) } @lines ];
 }
 
+sub get_iter {
+    my $self    = $_[0];
+    my $fetched = 0;
+    my $handle;
+    my $done;
+    return sub {
+        return undef if $done;
+        $fetched ||= do {
+            $self->_ua->mirror( $self->url, $self->cache_file );
+            1;
+        };
+        defined $handle or $handle = do {
+            require Path::Tiny;
+            $handle = Path::Tiny::path( $self->cache_file )->openr_utf8;
+        };
+        while ( my $line = <$handle> ) {
+            next if $line !~ /\A\s*\[/;
+            chomp $line;
+            return $self->_parse_line($line);
+        }
+        $done = 1;
+        return undef;
+    };
+}
+
 sub url {
     $_[0]->{url} = $_[0]->_build_url unless exists $_[0]->{url};
     $_[0]->{url};
@@ -228,6 +253,24 @@ headers where applicable.
 Though even if nothing has changed, you'll get a full copy of the last state.
 
 If you want an "only what's changed since last time we checked, see F<examples>
+
+=head2 get_iter
+
+Returns a lazy C<CodeRef> that returns one L<CPAN::Testers::TailLog::Result> at
+a time.
+
+  my $iter = $tailer->get_iter();
+  while ( my $item = $iter->() ) {
+      printf "%s %s\n", $item->grade, $item->filename;
+  }
+
+As with C<get>, present design is mostly "dumb state transfer", so all this
+really serves is a possible programming convenience. However, optimisations may
+be applied here in future so that C<< $iter->() >> pulls items off the wire as
+they arrive, saving you some traffic if you terminate early.
+
+Presently, an early termination only saves you a little disk IO, extra regex
+parses and shaves a few object creations.
 
 =head2 url
 

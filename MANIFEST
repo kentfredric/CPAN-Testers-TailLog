@@ -15,4 +15,5 @@ t/files/02-log.txt
 t/lib/HTTP/Tiny/Mock.pm
 t/offline/parse_01.t
 t/offline/parse_02.t
+t/offline/parse_02_iter.t
 t/online/01-keepcached.t
