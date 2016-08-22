@@ -22,6 +22,19 @@ sub grade_color {
     return "\e[33m";
 }
 
+sub perl_version_color {
+
+    # Stable RC's
+    $_[0] =~ /perl-v5\.(24\.1|22\.3)\s*RC/
+      and return "\e[30;41m";
+
+    # Blead RLS
+    $_[0] =~ /perl-v5\.25\.4/ and return "\e[30;45m";
+
+    # Everything else
+    return "\e[36m";
+}
+
 sub author_name {
     [ $_[0] =~ qr{\A([^/]+)/} ]->[0];
 }
@@ -61,10 +74,10 @@ sub update {
             author_color($author, $item->grade) . $author . "\e[0m"
         }ex;
 
-        printf
-"%s: %s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
-          $grade, $filename, $item->perl_version, $item->platform, $item->uuid;
-
+        my $perl = sprintf "%s%-20s\e[0m",
+          perl_version_color( $item->perl_version ), $item->perl_version;
+        printf "%s: %s ( %s on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
+          $grade, $filename, $perl, $item->platform, $item->uuid;
     }
 }
 
