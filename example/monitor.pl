@@ -6,7 +6,7 @@ use Time::HiRes qw( gettimeofday tv_interval sleep );
 use constant refresh_period => 60;
 use CPAN::Testers::TailLog;
 
-my %seen;
+my $last_uuid;
 my $fetcher = CPAN::Testers::TailLog->new();
 
 while (1) {
@@ -73,16 +73,24 @@ sub update {
     my @new;
     my $new_items = 0;
     my $iter      = $fetcher->get_iter;
+    my $first_uuid;
     while ( my $item = $iter->() ) {
 
         # stop iterating on re-match
-        last if exists $seen{ $item->uuid };
+        last if defined $last_uuid and $last_uuid eq $item->uuid;
+
+        if ( not defined $first_uuid ) {
+            $first_uuid = $item->uuid;
+        }
+
         $new_items++;
         next if $item->grade eq 'pass' and $item->filename !~ m^KENTNL/^;
-
-        # Vivify hash without wasting memory
-        $seen{ $item->uuid } = undef;
         push @new, $item;
+    }
+
+    # Set the watermark for next run.
+    if ( defined $first_uuid ) {
+        $last_uuid = $first_uuid;
     }
     unless (@new) {
         printf "%s: \e[35m -- No Updates ($new_items new items) -- \e[0m\n",
