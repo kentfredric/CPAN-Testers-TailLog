@@ -16,6 +16,12 @@ while (1) {
 
 }
 
+sub grade_color {
+    $_[0] eq 'pass' and return "\e[1;32m";
+    $_[0] eq 'fail' and return "\e[1;31m";
+    return "\e[33m";
+}
+
 sub update {
     my @new;
     for my $item ( @{ $fetcher->get } ) {
@@ -30,10 +36,8 @@ sub update {
     }
     printf "\e[36m%s\e[0m:\n", scalar localtime;
     for my $item (@new) {
-        my $color =
-            $item->grade eq 'pass' ? "\e[1;32m"
-          : $item->grade eq 'fail' ? "\e[1;31m"
-          :                          "\e[33m";
+        my $color = grade_color( $item->grade );
+
         printf
 "%s%10s\e[0m: %-55s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
           $color, $item->grade, $item->filename,
