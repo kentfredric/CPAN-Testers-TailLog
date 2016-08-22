@@ -22,6 +22,20 @@ sub grade_color {
     return "\e[33m";
 }
 
+sub author_name {
+    [ $_[0] =~ qr{\A([^/]+)/} ]->[0];
+}
+
+sub file_name {
+    [ $_[0] =~ qr{\A[^/]+/(.*$)} ]->[0];
+}
+
+sub author_color {
+    return '' unless $_[0] eq 'KENTNL';
+    return "\e[30;42m" unless $_[1] ne 'pass';
+    return "\e[30;43m";
+}
+
 sub update {
     my @new;
     for my $item ( @{ $fetcher->get } ) {
@@ -38,10 +52,18 @@ sub update {
     for my $item (@new) {
         my $grade = sprintf qq{%s%10s\e[0m}, grade_color( $item->grade ),
           $item->grade;
+
+        my $author = author_name( $item->filename );
+        my $filename = sprintf "%-55s", $item->filename;
+        $filename =~ s{
+            \A\Q$author\E
+        }{
+            author_color($author, $item->grade) . $author . "\e[0m"
+        }ex;
+
         printf
-"%s: %-55s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
-          $grade, $item->filename,
-          $item->perl_version, $item->platform, $item->uuid;
+"%s: %s ( \e[36m%-20s\e[0m on \e[35m%-40s\e[0m => \e[34m%s\e[0m )\e[0m\n",
+          $grade, $filename, $item->perl_version, $item->platform, $item->uuid;
 
     }
 }
