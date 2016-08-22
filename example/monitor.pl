@@ -20,7 +20,7 @@ sub update {
     my @new;
     for my $item ( @{ $fetcher->get } ) {
         next if exists $seen{ $item->uuid };
-        next if $item->grade eq 'pass';
+        next if $item->grade eq 'pass' and $item->filename !~ m^KENTNL/^;
         $seen{ $item->uuid } = 1;
         push @new, $item;
     }
