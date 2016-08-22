@@ -51,14 +51,22 @@ sub author_color {
 
 sub update {
     my @new;
-    for my $item ( @{ $fetcher->get } ) {
-        next if exists $seen{ $item->uuid };
+    my $new_items = 0;
+    my $iter      = $fetcher->get_iter;
+    while ( my $item = $iter->() ) {
+
+        # stop iterating on re-match
+        last if exists $seen{ $item->uuid };
+        $new_items++;
         next if $item->grade eq 'pass' and $item->filename !~ m^KENTNL/^;
-        $seen{ $item->uuid } = 1;
+
+        # Vivify hash without wasting memory
+        $seen{ $item->uuid } = undef;
         push @new, $item;
     }
     unless (@new) {
-        printf "%s: \e[35m -- No Updates -- \e[0m\n", scalar localtime;
+        printf "%s: \e[35m -- No Updates ($new_items new items) -- \e[0m\n",
+          scalar localtime;
         return;
     }
     printf "\e[36m%s\e[0m:\n", scalar localtime;
