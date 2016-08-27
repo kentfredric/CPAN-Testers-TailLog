@@ -26,7 +26,7 @@ sub cache_file {
     $_[0]->{cache_file};
 }
 
-sub get {
+sub get_all {
 
     # If this fails, we just parse what we parsed last time
     # Actually, not sure if mirror is atomic or not.
@@ -174,7 +174,7 @@ CPAN-Testers-TailLog - Extract recent test statuses from metabase log
   use CPAN::Testers::TailLog;
 
   my $tailer = CPAN::Testers::TailLog->new();
-  my $results = $tailer->get();
+  my $results = $tailer->get_all();
   for my $item ( @{ $results } ) {
     printf "%s: %s\n", $item->grade, $item->filename;
   }
@@ -213,7 +213,7 @@ probably want to set this to a writeable path.
 This will ensure you save redundant bandwidth if you sync too quickly, as the
 C<mtime> will be used for C<If-Modified-Since>.
 
-Your C<get> calls will still look the same, but they'll be a little faster,
+Your C<get_all> calls will still look the same, but they'll be a little faster,
 you'll eat a little less bandwidth, and stress the remote server a little less.
 
 =head3 new:url
@@ -234,12 +234,12 @@ Accessor for configured cache file path
 
   my $path = $tailer->cache_file
 
-=head2 get
+=head2 get_all
 
 Fetches the most recent data possible as an C<ArrayRef> of
 L<CPAN::Testers::TailLog::Result>
 
-  my $arrayref = $tailer->get();
+  my $arrayref = $tailer->get_all();
 
 Note that an arrayref will be returned regardless of what happens. It helps to
 assume the result is just a dumb transfer.
@@ -264,7 +264,7 @@ a time.
       printf "%s %s\n", $item->grade, $item->filename;
   }
 
-As with C<get>, present design is mostly "dumb state transfer", so all this
+As with C<get_all>, present design is mostly "dumb state transfer", so all this
 really serves is a possible programming convenience. However, optimisations may
 be applied here in future so that C<< $iter->() >> pulls items off the wire as
 they arrive, saving you some traffic if you terminate early.

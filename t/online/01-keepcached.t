@@ -22,8 +22,8 @@ sub timeit {
 my $client = CPAN::Testers::TailLog->new();
 
 my $result;
-my $first  = timeit( sub { $result = $client->get() } );
-my $second = timeit( sub { $result = $client->get() } );
+my $first  = timeit( sub { $result = $client->get_all() } );
+my $second = timeit( sub { $result = $client->get_all() } );
 
 note "First: $first\n";
 note "Second: $second\n";

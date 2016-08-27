@@ -10,7 +10,7 @@ my $tail =
   CPAN::Testers::TailLog->new(
     _ua => HTTP::Tiny::Mock->new('t/files/01-log.txt') );
 
-my $results = $tail->get();
+my $results = $tail->get_all();
 
 cmp_ok( ref $results,       'eq', 'ARRAY', 'ArrayRef returned' );
 cmp_ok( scalar @{$results}, '>',  0,       'Some results' );
