@@ -120,6 +120,7 @@ sub _build_cache_file {
         TEMPLATE => $DISTNAME . '-XXXXX',
         TMPDIR   => 1,
         SUFFIX   => '.txt',
+        EXLOCK   => 0,
     );
     $_[0]->{_tempfile} = $temp;
     require Path::Tiny;
