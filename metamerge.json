@@ -35,5 +35,8 @@
          "url" : "https://github.com/kentnl/CPAN-Testers-TailLog",
          "web" : "https://github.com/kentnl/CPAN-Testers-TailLog"
       }
-   }
+   },
+   "x_contributors" : [
+      "Slaven Rezic <srezic@cpan.org>"
+   ]
 }

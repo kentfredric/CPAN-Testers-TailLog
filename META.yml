@@ -9,7 +9,7 @@ build_requires:
 configure_requires:
   Module::Build::Tiny: '0.034'
 dynamic_config: 0
-generated_by: 'App::ModuleBuildTiny version 0.014, CPAN::Meta::Converter version 2.150010'
+generated_by: 'App::ModuleBuildTiny version 0.016, CPAN::Meta::Converter version 2.150010'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -31,4 +31,6 @@ resources:
   bugtracker: https://github.com/kentnl/CPAN-Testers-TailLog/issues
   repository: https://github.com/kentnl/CPAN-Testers-TailLog
 version: '0.001000'
+x_contributors:
+  - 'Slaven Rezic <srezic@cpan.org>'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
