@@ -44,11 +44,11 @@
    "provides" : {
       "CPAN::Testers::TailLog" : {
          "file" : "lib/CPAN/Testers/TailLog.pm",
-         "version" : "0.001000"
+         "version" : "0.001001"
       },
       "CPAN::Testers::TailLog::Result" : {
          "file" : "lib/CPAN/Testers/TailLog/Result.pm",
-         "version" : "0.001000"
+         "version" : "0.001001"
       }
    },
    "release_status" : "stable",
@@ -62,7 +62,7 @@
          "web" : "https://github.com/kentnl/CPAN-Testers-TailLog"
       }
    },
-   "version" : "0.001000",
+   "version" : "0.001001",
    "x_contributors" : [
       "Slaven Rezic <srezic@cpan.org>"
    ],
