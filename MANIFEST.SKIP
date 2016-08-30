@@ -1,5 +1,5 @@
 ^CPAN-Testers-TailLog-.*
-
+^\.tidyall\.d/
 
 #!start included /home/kent/perl5/perlbrew/perls/5.22.3-RC2-nossp-sdbm-nopmc/lib/5.22.3/ExtUtils/MANIFEST.SKIP
 # Avoid version control files.
