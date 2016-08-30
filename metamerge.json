@@ -22,8 +22,10 @@
          }
       },
       "x_examples" : {
-         "Time::HiRes" : "0",
-         "constant" : "0"
+         "requires" : {
+            "Time::HiRes" : "0",
+            "constant" : "0"
+         }
       }
    },
    "resources" : {

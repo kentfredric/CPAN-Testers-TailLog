@@ -39,6 +39,12 @@
             "Test::More" : "0.89",
             "Time::HiRes" : "0"
          }
+      },
+      "x_examples" : {
+         "requires" : {
+            "Time::HiRes" : "0",
+            "constant" : "0"
+         }
       }
    },
    "provides" : {
