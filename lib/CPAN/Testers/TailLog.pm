@@ -4,7 +4,7 @@ use warnings;
 
 package CPAN::Testers::TailLog;
 
-our $VERSION  = '0.001001';
+our $VERSION  = '0.001002';
 our $DISTNAME = 'CPAN-Testers-TailLog';
 
 # ABSTRACT: Extract recent test statuses from metabase log

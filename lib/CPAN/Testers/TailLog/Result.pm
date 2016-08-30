@@ -4,7 +4,7 @@ use warnings;
 
 package CPAN::Testers::TailLog::Result;
 
-our $VERSION = '0.001001';
+our $VERSION = '0.001002';
 
 # ABSTRACT: A single log entry from metabase.cpantesters.org
 

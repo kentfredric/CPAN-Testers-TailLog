@@ -18,10 +18,10 @@ name: CPAN-Testers-TailLog
 provides:
   CPAN::Testers::TailLog:
     file: lib/CPAN/Testers/TailLog.pm
-    version: '0.001001'
+    version: '0.001002'
   CPAN::Testers::TailLog::Result:
     file: lib/CPAN/Testers/TailLog/Result.pm
-    version: '0.001001'
+    version: '0.001002'
 requires:
   File::Temp: '0'
   HTTP::Tiny: '0'
@@ -30,7 +30,7 @@ requires:
 resources:
   bugtracker: https://github.com/kentnl/CPAN-Testers-TailLog/issues
   repository: https://github.com/kentnl/CPAN-Testers-TailLog
-version: '0.001001'
+version: '0.001002'
 x_contributors:
   - 'Slaven Rezic <srezic@cpan.org>'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
